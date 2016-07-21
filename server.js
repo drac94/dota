@@ -6,6 +6,8 @@
    var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
    var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
+   var http = require('http');
+
    // configuration =================
 
    app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
@@ -14,6 +16,29 @@
    app.use(bodyParser.json());                                     // parse application/json
    app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
    app.use(methodOverride());
+
+   app.get('/api/items', function(req, res) {
+
+    http.get({
+       host: 'api.steampowered.com',
+       path: '/IEconDOTA2_570/GetGameItems/v1/?key=yourkey'
+       //host: 'dota2.com',
+       //path: '/jsfeed/itemdata?key=yourkey'
+    }, function(response) {
+      console.log(response);
+        // Continuously update stream with data
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            // Data reception is done, do whatever with it!
+            var parsed = JSON.parse(body);
+            res.json(parsed);
+        });
+    });
+   });
+
 
    // application -------------------------------------------------------------
     app.get('*', function(req, res) {
