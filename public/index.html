@@ -32,14 +32,11 @@
 
         <!-- TODO LIST -->
         <div id="items-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-
                 <!-- LOOP OVER THE ITEMS IN $scope.items -->
-                <ul class="checkbox" ng-repeat="item in items.result.items">
-                  <li>{{item.name}}</li>
+                <ul class="checkbox" ng-repeat="item in items.itemdata">
+                  <li><img src="http://cdn.dota2.com/apps/dota2/images/items/{{item.img}}" alt="" />
+                    <span>{{item.dname}}</span></li>
                 </ul>
-
-            </div>
         </div>
 
     </div>

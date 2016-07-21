@@ -20,12 +20,11 @@
    app.get('/api/items', function(req, res) {
 
     http.get({
-       host: 'api.steampowered.com',
-       path: '/IEconDOTA2_570/GetGameItems/v1/?key=yourkey'
-       //host: 'dota2.com',
-       //path: '/jsfeed/itemdata?key=yourkey'
+       //host: 'api.steampowered.com',
+       //path: '/IEconDOTA2_570/GetGameItems/v1/?key=yourkey'
+       host: 'www.dota2.com',
+       path: '/jsfeed/itemdata'
     }, function(response) {
-      console.log(response);
         // Continuously update stream with data
         var body = '';
         response.on('data', function(d) {
@@ -39,6 +38,7 @@
     });
    });
 
+   //http://api.steampowered.com/IEconDOTA2_570/GetHeroes/v1/?key=yourkey
 
    // application -------------------------------------------------------------
     app.get('*', function(req, res) {
